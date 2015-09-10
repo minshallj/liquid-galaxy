@@ -77,10 +77,12 @@ else
 fi
 
 if [ -f ~/bin/lg-submit-event ]; then
-  ~/bin/lg-submit-event -t lg-relaunch \
-    -w "Manually relaunched $(hostname)"\
-    -d "uptime = $(uptime) \n \
-    ${USER}"
+  if [ "${NO_EVENT_PLEASE}" != "" ]; then
+    ~/bin/lg-submit-event -t lg-relaunch \
+      -w "Manually relaunched $(hostname)"\
+      -d "uptime = $(uptime) \n \
+      ${USER}"
+  fi
 fi
 
 if [ -f ~/bin/flowdock_event ]; then
